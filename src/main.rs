@@ -1,10 +1,4 @@
-use std::io;
-use std::process::Command;
-use std::process::Stdio;
-use std::process::Child;
-use std::io::Write;
-use std::path::Path;
-use std::env;
+use std::{io, io::Write, env, path::Path, process::{Command, Stdio, Child}};
 
 fn main() {
     loop {
@@ -37,7 +31,7 @@ fn main() {
 
                 "exit" => return,
 
-                command => {
+                _ => {
                     let stdin = previous_command.map_or(Stdio::inherit(), |output: Child| Stdio::from(output.stdout.unwrap()));
                     
                     let stdout = if commands.peek().is_some() {
